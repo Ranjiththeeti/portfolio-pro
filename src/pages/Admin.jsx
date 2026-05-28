@@ -97,7 +97,7 @@ const navigate = useNavigate();
           email: item.email,
 
           portfolio_link:
-            `http://localhost:5174/u/${item.username}`,
+            `https://ranjith-portfolio-pro.vercel.app/u/${item.username}`,
         },
 
         "bzl2trN7UOiEPLy7x"
