@@ -118,24 +118,47 @@ const navigate = useNavigate();
 
   // DELETE
 
-  const deletePortfolio = async (id) => {
+  const deletePortfolio = async (item) => {
 
-    try {
+  try {
 
-      await deleteDoc(
-        doc(db, "portfolios", id)
+    // SEND DELETE EMAIL
+
+    if (item.email) {
+
+      await emailjs.send(
+
+        "service_uymz8gw",
+
+        "template_maod83p",
+
+        {
+          name: item.name,
+
+          email: item.email,
+        },
+
+        "bzl2trN7UOiEPLy7x"
       );
-
-      alert("Portfolio Deleted");
-
-      fetchPortfolios();
-
-    } catch (error) {
-
-      console.log(error);
     }
-  };
 
+    // DELETE FROM FIRESTORE
+
+    await deleteDoc(
+      doc(db, "portfolios", item.id)
+    );
+
+    alert("Portfolio Deleted");
+
+    fetchPortfolios();
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Delete Failed");
+  }
+};
   return (
 
     <div className="min-h-screen bg-gray-100 p-8">
@@ -228,7 +251,7 @@ const navigate = useNavigate();
                   )}
 
                   <button
-                    onClick={() => deletePortfolio(item.id)}
+                    onClick={() => deletePortfolio(item)}
                     className="bg-red-600 text-white px-5 py-3 rounded-lg"
                   >
                     Delete

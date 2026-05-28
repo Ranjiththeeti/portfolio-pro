@@ -171,7 +171,7 @@ export default function Dashboard() {
       // DATA
 
       const portfolioData = {
-
+email: localStorage.getItem("userEmail"),
         username,
         name,
         email,
