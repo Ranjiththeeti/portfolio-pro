@@ -19,14 +19,11 @@ const login = async () => {
         password
       );
 
-    const loggedInEmail =
-      userCredential.user.email;
-
-    // SAVE EMAIL
+    // SAVE USER EMAIL
 
     localStorage.setItem(
       "userEmail",
-      loggedInEmail
+      userCredential.user.email
     );
 
     alert("Login successful");
@@ -34,7 +31,7 @@ const login = async () => {
     // ADMIN CHECK
 
     if (
-      loggedInEmail ===
+      userCredential.user.email ===
       "ranjithkumartheeti961@gmail.com"
     ) {
 
@@ -51,8 +48,7 @@ const login = async () => {
 
     alert(error.message);
   }
-};
-  return (
+};  return (
     <div className="flex flex-col gap-4 p-10 max-w-sm mx-auto">
       <h1 className="text-2xl font-bold">Login</h1>
 
