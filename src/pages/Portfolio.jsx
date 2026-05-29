@@ -247,14 +247,15 @@ const navigate = useNavigate();
 
                 {portfolio.resumeURL && (
 
-                  <a
-                    href={portfolio.resumeURL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="bg-green-600 hover:bg-green-700 text-white px-7 py-4 rounded-2xl font-semibold transition duration-300"
-                  >
-                    Download Resume
-                  </a>
+                 <a
+  href={portfolio.resumeURL}
+  target="_blank"
+  rel="noreferrer"
+  download
+  className="bg-green-600 hover:bg-green-700 text-white px-7 py-4 rounded-2xl font-semibold transition duration-300"
+>
+  Download Resume
+</a>
                 )}
 
               </div>

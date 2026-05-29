@@ -1,5 +1,3 @@
-import axios from "axios";
-
 export const uploadToCloudinary = async (file) => {
 
   const formData = new FormData();
@@ -8,13 +6,32 @@ export const uploadToCloudinary = async (file) => {
 
   formData.append(
     "upload_preset",
-    "portfolio_upload"
+    "portfolio_unsigned"
   );
 
-  const res = await axios.post(
-    "https://api.cloudinary.com/v1_1/dighe85qb/auto/upload",
-    formData
+  // CHECK FILE TYPE
+
+  const isPDF =
+    file.type === "application/pdf";
+
+  // PDF -> RAW
+  // IMAGE -> IMAGE
+
+  const resourceType =
+    isPDF ? "raw" : "image";
+
+  const response = await fetch(
+
+    `https://api.cloudinary.com/v1_1/dj0jwlb3z/${resourceType}/upload`,
+
+    {
+      method: "POST",
+      body: formData,
+    }
   );
 
-  return res.data.secure_url;
+  const data =
+    await response.json();
+
+  return data.secure_url;
 };

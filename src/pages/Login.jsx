@@ -3,7 +3,9 @@ import { useState } from "react";
 import {
   signInWithEmailAndPassword,
 } from "firebase/auth";
-
+import {
+  sendPasswordResetEmail
+} from "firebase/auth";
 import { auth } from "../firebase/config";
 
 import { useNavigate } from "react-router-dom";
@@ -66,7 +68,33 @@ export default function Login() {
       alert(error.message);
     }
   };
+const forgotPassword = async () => {
 
+  if (!email) {
+
+    alert("Enter your email");
+
+    return;
+  }
+
+  try {
+
+    await sendPasswordResetEmail(
+      auth,
+      email
+    );
+
+    alert(
+      "Password reset email sent"
+    );
+
+  } catch (error) {
+
+    console.log(error);
+
+    alert("Failed to send email");
+  }
+};
   return (
 
     <div className="auth-page">
@@ -102,7 +130,13 @@ export default function Login() {
           <button type="submit">
             Login
           </button>
-
+<button
+  type="button"
+  onClick={forgotPassword}
+  className="text-blue-500 mt-3"
+>
+  Forgot Password?
+</button>
         </form>
 
         <p>

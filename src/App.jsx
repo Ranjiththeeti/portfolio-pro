@@ -25,7 +25,7 @@ export default function App() {
           path="/"
           element={<Home />}
         />
-
+<Route path="/admin" element={<Admin />} />
         {/* REGISTER */}
 
         <Route
