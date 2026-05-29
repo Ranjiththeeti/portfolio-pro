@@ -1,73 +1,292 @@
-import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../firebase/config";
+import "./Login.css";
+
 import { useState } from "react";
+
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "firebase/auth";
+
+import { auth } from "../firebase/config";
+
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+
+  const [isSignup, setIsSignup] =
+    useState(false);
+
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
   const navigate = useNavigate();
 
-const login = async () => {
+  // LOGIN
 
-  try {
+  const login = async (e) => {
 
-    const userCredential =
-      await signInWithEmailAndPassword(
+    e.preventDefault();
+
+    try {
+
+      const userCredential =
+        await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+
+      const userEmail =
+        userCredential.user.email;
+
+      localStorage.setItem(
+        "userEmail",
+        userEmail
+      );
+
+      // ADMIN LOGIN
+
+      if (
+        userEmail ===
+        "ranjithkumartheeti961@gmail.com"
+      ) {
+
+        navigate("/admin");
+
+      } else {
+
+        navigate("/dashboard");
+      }
+
+    } catch (error) {
+
+      console.log(error);
+
+      alert(error.message);
+    }
+  };
+
+  // REGISTER
+
+  const register = async (e) => {
+
+    e.preventDefault();
+
+    try {
+
+      await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-    // SAVE USER EMAIL
+      alert("Account Created");
 
-    localStorage.setItem(
-      "userEmail",
-      userCredential.user.email
-    );
+      setIsSignup(false);
 
-    alert("Login successful");
+    } catch (error) {
 
-    // ADMIN CHECK
+      console.log(error);
 
-    if (
-      userCredential.user.email ===
-      "ranjithkumartheeti961@gmail.com"
-    ) {
-
-      navigate("/admin");
-
-    } else {
-
-      navigate("/dashboard");
+      alert(error.message);
     }
+  };
 
-  } catch (error) {
+  return (
 
-    console.log(error);
+    <div className="login-page">
 
-    alert(error.message);
-  }
-};  return (
-    <div className="flex flex-col gap-4 p-10 max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold">Login</h1>
+      <div className={`auth-wrapper ${isSignup ? "toggled" : ""}`}>
 
-      <input
-        className="border p-2"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+        {/* SHAPES */}
 
-      <input
-        type="password"
-        className="border p-2"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+        <div className="background-shape"></div>
 
-      <button className="bg-blue-500 text-white p-2" onClick={login}>
-        Login
-      </button>
+        <div className="secondary-shape"></div>
+
+        {/* LOGIN */}
+
+        <div className="credentials-panel signin">
+
+          <h2 className="slide-element">
+            Login
+          </h2>
+
+          <form onSubmit={login}>
+
+            <div className="field-wrapper slide-element">
+
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+              />
+
+              <label>Email</label>
+
+            </div>
+
+            <div className="field-wrapper slide-element">
+
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+              />
+
+              <label>Password</label>
+
+            </div>
+
+            <div className="field-wrapper slide-element">
+
+              <button
+                className="submit-button"
+                type="submit"
+              >
+                Login
+              </button>
+
+            </div>
+
+            <div className="switch-link slide-element">
+
+              <p>
+
+                Don't have an account?
+
+                <br />
+
+                <a
+                  href="/#"
+                  onClick={(e) => {
+
+                    e.preventDefault();
+
+                    setIsSignup(true);
+                  }}
+                >
+                  Sign Up
+                </a>
+
+              </p>
+
+            </div>
+
+          </form>
+
+        </div>
+
+        {/* WELCOME */}
+
+        <div className="welcome-section signin">
+
+          <h2 className="slide-element">
+            WELCOME BACK!
+          </h2>
+
+        </div>
+
+        {/* REGISTER */}
+
+        <div className="credentials-panel signup">
+
+          <h2 className="slide-element">
+            Register
+          </h2>
+
+          <form onSubmit={register}>
+
+            <div className="field-wrapper slide-element">
+
+              <input
+                type="email"
+                required
+                value={email}
+                onChange={(e) =>
+                  setEmail(e.target.value)
+                }
+              />
+
+              <label>Email</label>
+
+            </div>
+
+            <div className="field-wrapper slide-element">
+
+              <input
+                type="password"
+                required
+                value={password}
+                onChange={(e) =>
+                  setPassword(e.target.value)
+                }
+              />
+
+              <label>Password</label>
+
+            </div>
+
+            <div className="field-wrapper slide-element">
+
+              <button
+                className="submit-button"
+                type="submit"
+              >
+                Register
+              </button>
+
+            </div>
+
+            <div className="switch-link slide-element">
+
+              <p>
+
+                Already have an account?
+
+                <br />
+
+                <a
+                  href="/#"
+                  onClick={(e) => {
+
+                    e.preventDefault();
+
+                    setIsSignup(false);
+                  }}
+                >
+                  Sign In
+                </a>
+
+              </p>
+
+            </div>
+
+          </form>
+
+        </div>
+
+        {/* WELCOME */}
+
+        <div className="welcome-section signup">
+
+          <h2 className="slide-element">
+            WELCOME!
+          </h2>
+
+        </div>
+
+      </div>
+
     </div>
   );
 }
