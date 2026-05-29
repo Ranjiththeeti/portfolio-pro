@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
 import {
@@ -18,7 +18,7 @@ export default function Portfolio() {
   const [portfolio, setPortfolio] = useState(null);
 
   const [loading, setLoading] = useState(true);
-
+const navigate = useNavigate();
   useEffect(() => {
 
     const fetchPortfolio = async () => {
@@ -256,7 +256,16 @@ export default function Portfolio() {
                     Download Resume
                   </a>
                 )}
+{localStorage.getItem("userEmail") ===
+portfolio.email && (
 
+  <button
+    onClick={() => navigate("/dashboard")}
+    className="bg-yellow-500 hover:bg-yellow-600 text-white px-7 py-4 rounded-2xl font-semibold shadow-lg transition duration-300 hover:scale-105"
+  >
+    Edit Portfolio
+  </button>
+)}
               </div>
 
             </div>

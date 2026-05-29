@@ -87,48 +87,71 @@ export default function Dashboard() {
 
   // LIVE STATUS
 
-  useEffect(() => {
+useEffect(() => {
 
-    const interval = setInterval(() => {
+  const fetchUserPortfolio = async () => {
 
-      if (username) {
+    try {
 
-        fetchPortfolioData(username);
+      const userEmail =
+        localStorage.getItem("userEmail");
+
+      if (!userEmail) return;
+
+      const q = query(
+        collection(db, "portfolios"),
+        where("email", "==", userEmail)
+      );
+
+      const querySnapshot =
+        await getDocs(q);
+
+      if (!querySnapshot.empty) {
+
+        const data =
+          querySnapshot.docs[0].data();
+
+        const id =
+          querySnapshot.docs[0].id;
+
+        const portfolioData = {
+          id,
+          ...data,
+        };
+
+        setMyPortfolio(portfolioData);
+
+        // AUTO FILL FORM
+
+        setUsername(data.username || "");
+        setName(data.name || "");
+        setTitle(data.title || "");
+        setHeadline(data.headline || "");
+        setAbout(data.about || "");
+
+        setPhone(data.phone || "");
+        setLocation(data.location || "");
+
+        setSkills(data.skills || "");
+        setEducation(data.education || "");
+        setExperience(data.experience || "");
+        setProjects(data.projects || "");
+        setCertifications(data.certifications || "");
+
+        setGithub(data.github || "");
+        setLinkedin(data.linkedin || "");
+
       }
 
-    }, 2000);
+    } catch (error) {
 
-    return () => clearInterval(interval);
-
-  }, [username]);
-
-  // LOAD DATA
-
-  const loadPortfolioData = () => {
-
-    if (!myPortfolio) return;
-
-    setUsername(myPortfolio.username || "");
-    setName(myPortfolio.name || "");
-    setEmail(myPortfolio.email || "");
-    setTitle(myPortfolio.title || "");
-    setHeadline(myPortfolio.headline || "");
-    setAbout(myPortfolio.about || "");
-
-    setPhone(myPortfolio.phone || "");
-    setLocation(myPortfolio.location || "");
-
-    setSkills(myPortfolio.skills || "");
-    setEducation(myPortfolio.education || "");
-    setExperience(myPortfolio.experience || "");
-    setProjects(myPortfolio.projects || "");
-    setCertifications(myPortfolio.certifications || "");
-
-    setGithub(myPortfolio.github || "");
-    setLinkedin(myPortfolio.linkedin || "");
-
-    setTheme(myPortfolio.theme || "developer");
+      console.log(error);
+    }
   };
+
+  fetchUserPortfolio();
+
+}, []);
 
   // SUBMIT
 
@@ -196,7 +219,7 @@ email: localStorage.getItem("userEmail"),
         photoURL,
         resumeURL,
 
-        status: myPortfolio?.status || "pending",
+        status: "pending",
 
         createdAt: new Date(),
       };
