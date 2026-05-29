@@ -1,9 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
-import Admin from "./pages/Admin";
 import Portfolio from "./pages/Portfolio";
+import Admin from "./pages/Admin";
 
 export default function App() {
 
@@ -13,21 +14,28 @@ export default function App() {
 
       <Routes>
 
-        {/* LOGIN PAGE */}
+        {/* HOME */}
 
         <Route
           path="/"
+          element={<Home />}
+        />
+
+        {/* LOGIN */}
+
+        <Route
+          path="/login"
           element={<Login />}
         />
 
-        {/* USER DASHBOARD */}
+        {/* DASHBOARD */}
 
         <Route
           path="/dashboard"
           element={<Dashboard />}
         />
 
-        {/* ADMIN PANEL */}
+        {/* ADMIN */}
 
         <Route
           path="/admin"
