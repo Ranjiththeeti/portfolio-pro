@@ -219,7 +219,7 @@ email: localStorage.getItem("userEmail"),
         photoURL,
         resumeURL,
 
-        status: "pending",
+        status: myPortfolio?.status || "pending",
 
         createdAt: new Date(),
       };

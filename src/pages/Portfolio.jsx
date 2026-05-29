@@ -256,16 +256,7 @@ const navigate = useNavigate();
                     Download Resume
                   </a>
                 )}
-{localStorage.getItem("userEmail") ===
-portfolio.email && (
 
-  <button
-    onClick={() => navigate("/dashboard")}
-    className="bg-yellow-500 hover:bg-yellow-600 text-white px-7 py-4 rounded-2xl font-semibold shadow-lg transition duration-300 hover:scale-105"
-  >
-    Edit Portfolio
-  </button>
-)}
               </div>
 
             </div>

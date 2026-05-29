@@ -217,7 +217,11 @@ const navigate = useNavigate();
                   </span>
 
                 </div>
-
+{item.status === "pending" && (
+  <span className="text-yellow-600 font-bold">
+    Needs Re-Approval
+  </span>
+)}
                 {/* BUTTONS */}
 
                 <div className="flex gap-4 mt-6 flex-wrap">
