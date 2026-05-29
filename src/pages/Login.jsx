@@ -1,20 +1,18 @@
-import "./Login.css";
-
 import { useState } from "react";
 
 import {
   signInWithEmailAndPassword,
-  createUserWithEmailAndPassword
 } from "firebase/auth";
 
 import { auth } from "../firebase/config";
 
 import { useNavigate } from "react-router-dom";
 
+import "../styles/auth.css";
+
 export default function Login() {
 
-  const [isSignup, setIsSignup] =
-    useState(false);
+  const navigate = useNavigate();
 
   const [email, setEmail] =
     useState("");
@@ -22,11 +20,7 @@ export default function Login() {
   const [password, setPassword] =
     useState("");
 
-  const navigate = useNavigate();
-
-  // LOGIN
-
-  const login = async (e) => {
+  const handleLogin = async (e) => {
 
     e.preventDefault();
 
@@ -42,10 +36,14 @@ export default function Login() {
       const userEmail =
         userCredential.user.email;
 
+      // STORE EMAIL
+
       localStorage.setItem(
         "userEmail",
         userEmail
       );
+
+      alert("Login Successful");
 
       // ADMIN LOGIN
 
@@ -69,221 +67,57 @@ export default function Login() {
     }
   };
 
-  // REGISTER
-
-  const register = async (e) => {
-
-    e.preventDefault();
-
-    try {
-
-      await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-
-      alert("Account Created");
-
-      setIsSignup(false);
-
-    } catch (error) {
-
-      console.log(error);
-
-      alert(error.message);
-    }
-  };
-
   return (
 
-    <div className="login-page">
+    <div className="auth-page">
 
-      <div className={`auth-wrapper ${isSignup ? "toggled" : ""}`}>
+      <div className="auth-box">
 
-        {/* SHAPES */}
+        <h1>
+          Login
+        </h1>
 
-        <div className="background-shape"></div>
+        <form onSubmit={handleLogin}>
 
-        <div className="secondary-shape"></div>
+          <input
+            type="email"
+            placeholder="Enter Email"
+            required
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+          />
 
-        {/* LOGIN */}
+          <input
+            type="password"
+            placeholder="Enter Password"
+            required
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+          />
 
-        <div className="credentials-panel signin">
-
-          <h2 className="slide-element">
+          <button type="submit">
             Login
-          </h2>
+          </button>
 
-          <form onSubmit={login}>
+        </form>
 
-            <div className="field-wrapper slide-element">
+        <p>
 
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
-              />
+          Don't have account?
 
-              <label>Email</label>
+          <span
+            onClick={() =>
+              navigate("/register")
+            }
+          >
+            {" "}Register
+          </span>
 
-            </div>
-
-            <div className="field-wrapper slide-element">
-
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
-              />
-
-              <label>Password</label>
-
-            </div>
-
-            <div className="field-wrapper slide-element">
-
-              <button
-                className="submit-button"
-                type="submit"
-              >
-                Login
-              </button>
-
-            </div>
-
-            <div className="switch-link slide-element">
-
-              <p>
-
-                Don't have an account?
-
-                <br />
-
-                <a
-                  href="/#"
-                  onClick={(e) => {
-
-                    e.preventDefault();
-
-                    setIsSignup(true);
-                  }}
-                >
-                  Sign Up
-                </a>
-
-              </p>
-
-            </div>
-
-          </form>
-
-        </div>
-
-        {/* WELCOME */}
-
-        <div className="welcome-section signin">
-
-          <h2 className="slide-element">
-            WELCOME BACK!
-          </h2>
-
-        </div>
-
-        {/* REGISTER */}
-
-        <div className="credentials-panel signup">
-
-          <h2 className="slide-element">
-            Register
-          </h2>
-
-          <form onSubmit={register}>
-
-            <div className="field-wrapper slide-element">
-
-              <input
-                type="email"
-                required
-                value={email}
-                onChange={(e) =>
-                  setEmail(e.target.value)
-                }
-              />
-
-              <label>Email</label>
-
-            </div>
-
-            <div className="field-wrapper slide-element">
-
-              <input
-                type="password"
-                required
-                value={password}
-                onChange={(e) =>
-                  setPassword(e.target.value)
-                }
-              />
-
-              <label>Password</label>
-
-            </div>
-
-            <div className="field-wrapper slide-element">
-
-              <button
-                className="submit-button"
-                type="submit"
-              >
-                Register
-              </button>
-
-            </div>
-
-            <div className="switch-link slide-element">
-
-              <p>
-
-                Already have an account?
-
-                <br />
-
-                <a
-                  href="/#"
-                  onClick={(e) => {
-
-                    e.preventDefault();
-
-                    setIsSignup(false);
-                  }}
-                >
-                  Sign In
-                </a>
-
-              </p>
-
-            </div>
-
-          </form>
-
-        </div>
-
-        {/* WELCOME */}
-
-        <div className="welcome-section signup">
-
-          <h2 className="slide-element">
-            WELCOME!
-          </h2>
-
-        </div>
+        </p>
 
       </div>
 

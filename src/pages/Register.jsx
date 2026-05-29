@@ -1,61 +1,107 @@
 import { useState } from "react";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, db } from "../firebase/config";
-import { setDoc, doc } from "firebase/firestore";
+
+import {
+  createUserWithEmailAndPassword,
+} from "firebase/auth";
+
+import { auth } from "../firebase/config";
+
 import { useNavigate } from "react-router-dom";
 
+import "../styles/auth.css";
+
 export default function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
-  const register = async () => {
+  const [email, setEmail] =
+    useState("");
+
+  const [password, setPassword] =
+    useState("");
+
+  const handleRegister = async (e) => {
+
+    e.preventDefault();
+
     try {
-      const res = await createUserWithEmailAndPassword(
+
+      await createUserWithEmailAndPassword(
         auth,
         email,
         password
       );
 
-      await setDoc(doc(db, "users", res.user.uid), {
-        email,
-        role: "user",
-      });
+      alert(
+        "Registration Successful"
+      );
 
-      alert("Registration successful");
+      // REDIRECT TO LOGIN
 
-      navigate("/");
+      navigate("/login");
 
     } catch (error) {
-      console.error(error);
+
+      console.log(error);
+
       alert(error.message);
     }
   };
 
   return (
-    <div className="flex flex-col gap-4 p-10 max-w-sm mx-auto">
-      <h1 className="text-2xl font-bold">Register</h1>
 
-      <input
-        className="border p-2"
-        placeholder="Email"
-        onChange={(e) => setEmail(e.target.value)}
-      />
+    <div className="auth-page">
 
-      <input
-        type="password"
-        className="border p-2"
-        placeholder="Password"
-        onChange={(e) => setPassword(e.target.value)}
-      />
+      <div className="auth-box">
 
-      <button
-        className="bg-green-600 text-white p-2"
-        onClick={register}
-      >
-        Register
-      </button>
+        <h1>
+          Create Account
+        </h1>
+
+        <form onSubmit={handleRegister}>
+
+          <input
+            type="email"
+            placeholder="Enter Email"
+            required
+            value={email}
+            onChange={(e) =>
+              setEmail(e.target.value)
+            }
+          />
+
+          <input
+            type="password"
+            placeholder="Enter Password"
+            required
+            value={password}
+            onChange={(e) =>
+              setPassword(e.target.value)
+            }
+          />
+
+          <button type="submit">
+            Register
+          </button>
+
+        </form>
+
+        <p>
+
+          Already have account?
+
+          <span
+            onClick={() =>
+              navigate("/login")
+            }
+          >
+            {" "}Login
+          </span>
+
+        </p>
+
+      </div>
+
     </div>
   );
 }

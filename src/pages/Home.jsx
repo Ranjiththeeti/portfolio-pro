@@ -57,21 +57,21 @@ export default function Home() {
 
             <div className="flex flex-wrap gap-6 mt-12">
 
-              <button
-                onClick={() => navigate("/login")}
-                className="bg-cyan-500 hover:bg-cyan-600 px-10 py-5 rounded-2xl text-xl font-bold shadow-2xl hover:scale-105 transition duration-300"
-              >
-                Get Started
-              </button>
+  <button
+    onClick={() => navigate("/register")}
+    className="bg-cyan-500 hover:bg-cyan-600 px-10 py-5 rounded-2xl text-xl font-bold shadow-2xl hover:scale-105 transition duration-300"
+  >
+    Get Started
+  </button>
 
-              <button
-                onClick={() => navigate("/login")}
-                className="border border-white/20 bg-white/10 hover:bg-white/20 px-10 py-5 rounded-2xl text-xl font-bold backdrop-blur-xl hover:scale-105 transition duration-300"
-              >
-                Login
-              </button>
+  <button
+    onClick={() => navigate("/login")}
+    className="border border-white/20 bg-white/10 hover:bg-white/20 px-10 py-5 rounded-2xl text-xl font-bold backdrop-blur-xl hover:scale-105 transition duration-300"
+  >
+    Login
+  </button>
 
-            </div>
+</div>
 
             {/* STATS */}
 
