@@ -1,272 +1,224 @@
 import { useNavigate } from "react-router-dom";
 
 export default function Home() {
-
   const navigate = useNavigate();
 
   return (
+    <div className="min-h-screen bg-black text-white">
 
-    <div className="min-h-screen bg-black text-white overflow-hidden">
+      {/* NAVBAR */}
+      <nav className="flex justify-between items-center px-8 py-6 border-b border-white/10">
 
-      {/* HERO SECTION */}
+        <div className="flex items-center gap-3">
+          <img
+            src="/logo.png"
+            alt="TRK"
+            className="w-12 h-12 rounded-full"
+          />
 
-      <div className="relative min-h-screen flex items-center justify-center px-6">
+          <h1 className="text-2xl font-black text-cyan-400">
+            Portfolio Generator
+          </h1>
+        </div>
 
-        {/* BACKGROUND GLOW */}
+        <div className="flex gap-4">
 
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-500 rounded-full blur-[180px] opacity-20"></div>
+          <button
+            onClick={() => navigate("/login")}
+            className="px-6 py-3 rounded-xl bg-white/10 hover:bg-white/20 transition"
+          >
+            Login
+          </button>
 
-        <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-purple-500 rounded-full blur-[180px] opacity-20"></div>
+          <button
+            onClick={() => navigate("/register")}
+            className="px-6 py-3 rounded-xl bg-cyan-500 hover:bg-cyan-600 font-bold transition"
+          >
+            Get Started
+          </button>
 
-        {/* CONTENT */}
+        </div>
+      </nav>
 
-        <div className="relative z-10 max-w-7xl w-full grid md:grid-cols-2 gap-16 items-center">
+      {/* HERO */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+
+        <div className="grid md:grid-cols-2 gap-16 items-center">
 
           {/* LEFT */}
-
           <div>
 
-            <p className="text-cyan-400 font-bold tracking-[4px] uppercase">
-              AI Powered Portfolio Platform
-            </p>
+            <span className="bg-cyan-500/20 text-cyan-400 px-4 py-2 rounded-full">
+              🚀 AI Powered Portfolio Builder
+            </span>
 
-            <h1 className="text-6xl md:text-7xl font-black leading-tight mt-6">
+            <h1 className="text-6xl md:text-7xl font-black mt-8 leading-tight">
 
-              Build Your
+              Create Your
+
               <span className="text-cyan-400">
-                {" "}Dream Portfolio
+                {" "}Professional Portfolio
               </span>
 
               <br />
 
-              In Minutes 🚀
+              In Minutes
 
             </h1>
 
-            <p className="text-gray-400 text-xl leading-10 mt-8">
+            <p className="text-gray-400 text-xl mt-8 leading-9">
 
-              Create stunning portfolios,
+              Build beautiful portfolios,
               upload resumes,
-              manage approvals,
-              share your public profile,
-              and impress recruiters instantly.
+              get admin approval,
+              and share your public profile
+              with recruiters instantly.
 
             </p>
 
-            {/* BUTTONS */}
+            <div className="flex flex-wrap gap-6 mt-10">
 
-            <div className="flex flex-wrap gap-6 mt-12">
+              <button
+                onClick={() => navigate("/register")}
+                className="bg-cyan-500 hover:bg-cyan-600 px-10 py-5 rounded-2xl text-xl font-bold transition"
+              >
+                Get Started
+              </button>
 
-  <button
-    onClick={() => navigate("/register")}
-    className="bg-cyan-500 hover:bg-cyan-600 px-10 py-5 rounded-2xl text-xl font-bold shadow-2xl hover:scale-105 transition duration-300"
-  >
-    Get Started
-  </button>
-
-  <button
-    onClick={() => navigate("/login")}
-    className="border border-white/20 bg-white/10 hover:bg-white/20 px-10 py-5 rounded-2xl text-xl font-bold backdrop-blur-xl hover:scale-105 transition duration-300"
-  >
-    Login
-  </button>
-
-</div>
-
-            {/* STATS */}
-
-            <div className="flex flex-wrap gap-10 mt-16">
-
-              <div>
-
-                <h2 className="text-4xl font-black text-cyan-400">
-                  100+
-                </h2>
-
-                <p className="text-gray-400 mt-2">
-                  Portfolios Created
-                </p>
-
-              </div>
-
-              <div>
-
-                <h2 className="text-4xl font-black text-purple-400">
-                  24/7
-                </h2>
-
-                <p className="text-gray-400 mt-2">
-                  Cloud Access
-                </p>
-
-              </div>
-
-              <div>
-
-                <h2 className="text-4xl font-black text-pink-400">
-                  AI
-                </h2>
-
-                <p className="text-gray-400 mt-2">
-                  Smart Portfolio Builder
-                </p>
-
-              </div>
+              <button
+                onClick={() => navigate("/login")}
+                className="border border-white/20 px-10 py-5 rounded-2xl text-xl font-bold hover:bg-white/10 transition"
+              >
+                Login
+              </button>
 
             </div>
 
           </div>
 
           {/* RIGHT */}
+          <div className="flex justify-center">
 
-          <div className="relative">
-
-            {/* MAIN CARD */}
-
-            <div className="bg-white/10 backdrop-blur-2xl border border-white/20 rounded-[40px] p-8 shadow-2xl">
-
-              <img
-                src="https://images.unsplash.com/photo-1498050108023-c5249f4df085"
-                alt="portfolio"
-                className="rounded-3xl shadow-2xl"
-              />
-
-              <div className="mt-8">
-
-                <h2 className="text-3xl font-black">
-                  Modern Portfolio Experience
-                </h2>
-
-                <p className="text-gray-300 mt-4 leading-8">
-
-                  Beautiful themes,
-                  real-time approvals,
-                  admin dashboard,
-                  email notifications,
-                  resume hosting,
-                  and custom portfolio links.
-
-                </p>
-
-              </div>
-
-            </div>
-
-            {/* FLOATING CARDS */}
-
-            <div className="absolute -top-8 -left-8 bg-cyan-500 px-6 py-4 rounded-2xl shadow-2xl animate-bounce">
-
-              ⚡ Fast Deployment
-
-            </div>
-
-            <div className="absolute -bottom-8 -right-8 bg-purple-500 px-6 py-4 rounded-2xl shadow-2xl animate-pulse">
-
-              🔥 Premium UI
-
-            </div>
+            <img
+              src="/logo.png"
+              alt="TRK Logo"
+              className="w-[400px] md:w-[500px] animate-pulse"
+            />
 
           </div>
 
         </div>
 
-      </div>
+      </section>
 
       {/* FEATURES */}
+      <section className="max-w-7xl mx-auto px-6 py-20">
 
-      <div className="py-24 px-6">
+        <h2 className="text-5xl font-black text-center">
 
-        <div className="max-w-7xl mx-auto">
+          Why Choose
 
-          <h2 className="text-5xl font-black text-center">
+          <span className="text-cyan-400">
+            {" "}Portfolio Generator?
+          </span>
 
-            Why Choose
-            <span className="text-cyan-400">
-              {" "}Portfolio Generator?
-            </span>
+        </h2>
 
-          </h2>
+        <div className="grid md:grid-cols-3 gap-8 mt-20">
 
-          <div className="grid md:grid-cols-3 gap-10 mt-20">
+          <div className="bg-white/10 p-8 rounded-3xl border border-white/10">
 
-            {/* CARD */}
+            <div className="text-5xl">🎨</div>
 
-            <div className="bg-white/10 border border-white/10 rounded-[32px] p-10 hover:scale-105 transition duration-300 backdrop-blur-xl">
+            <h3 className="text-2xl font-bold mt-5">
+              Beautiful Themes
+            </h3>
 
-              <div className="text-6xl">
-                🎨
-              </div>
+            <p className="text-gray-400 mt-4">
+              Multiple premium portfolio themes.
+            </p>
 
-              <h3 className="text-3xl font-bold mt-6">
-                Beautiful Designs
-              </h3>
+          </div>
 
-              <p className="text-gray-400 mt-5 leading-8">
+          <div className="bg-white/10 p-8 rounded-3xl border border-white/10">
 
-                Stunning modern portfolio themes
-                with responsive layouts.
+            <div className="text-5xl">📩</div>
 
-              </p>
+            <h3 className="text-2xl font-bold mt-5">
+              Email Notifications
+            </h3>
 
-            </div>
+            <p className="text-gray-400 mt-4">
+              Automatic approval and rejection emails.
+            </p>
 
-            {/* CARD */}
+          </div>
 
-            <div className="bg-white/10 border border-white/10 rounded-[32px] p-10 hover:scale-105 transition duration-300 backdrop-blur-xl">
+          <div className="bg-white/10 p-8 rounded-3xl border border-white/10">
 
-              <div className="text-6xl">
-                📩
-              </div>
+            <div className="text-5xl">🚀</div>
 
-              <h3 className="text-3xl font-bold mt-6">
-                Email Notifications
-              </h3>
+            <h3 className="text-2xl font-bold mt-5">
+              Instant Deployment
+            </h3>
 
-              <p className="text-gray-400 mt-5 leading-8">
-
-                Users receive approval
-                and rejection emails instantly.
-
-              </p>
-
-            </div>
-
-            {/* CARD */}
-
-            <div className="bg-white/10 border border-white/10 rounded-[32px] p-10 hover:scale-105 transition duration-300 backdrop-blur-xl">
-
-              <div className="text-6xl">
-                🚀
-              </div>
-
-              <h3 className="text-3xl font-bold mt-6">
-                Instant Deployment
-              </h3>
-
-              <p className="text-gray-400 mt-5 leading-8">
-
-                Deploy your portfolio globally
-                with one click using Vercel.
-
-              </p>
-
-            </div>
+            <p className="text-gray-400 mt-4">
+              Public portfolio links for every user.
+            </p>
 
           </div>
 
         </div>
 
-      </div>
+      </section>
+
+      {/* STATS */}
+      <section className="py-20 bg-white/5">
+
+        <div className="max-w-6xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+
+          <div>
+            <h2 className="text-6xl font-black text-cyan-400">
+              100+
+            </h2>
+
+            <p className="text-gray-400 mt-3">
+              Portfolios Created
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-6xl font-black text-purple-400">
+              24/7
+            </h2>
+
+            <p className="text-gray-400 mt-3">
+              Cloud Access
+            </p>
+          </div>
+
+          <div>
+            <h2 className="text-6xl font-black text-pink-400">
+              AI
+            </h2>
+
+            <p className="text-gray-400 mt-3">
+              Smart Builder
+            </p>
+          </div>
+
+        </div>
+
+      </section>
 
       {/* FOOTER */}
+      <footer className="border-t border-white/10 py-10 text-center">
 
-      <div className="border-t border-white/10 py-10 text-center text-gray-500">
-
-        <p className="text-lg">
+        <p className="text-gray-500 text-lg">
           Built with ❤️ by Ranjith Theeti
         </p>
 
-      </div>
+      </footer>
 
     </div>
   );
