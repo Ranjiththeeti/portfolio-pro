@@ -104,7 +104,7 @@ export default function Admin() {
             email: item.email,
 
             portfolio_link:
-              `https://portfolio-pro-ranjith.vercel.app/u/${item.username}`,
+             `https://ranjith-portfolio-pro.vercel.app/u/${item.username}`,
           },
 
           "bzl2trN7UOiEPLy7x"

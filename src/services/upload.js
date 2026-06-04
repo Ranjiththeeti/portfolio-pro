@@ -6,32 +6,31 @@ export const uploadToCloudinary = async (file) => {
 
   formData.append(
     "upload_preset",
-    "portfolio_unsigned"
+    "portfolio_upload"
   );
 
-  // CHECK FILE TYPE
-
-  const isPDF =
-    file.type === "application/pdf";
-
-  // PDF -> RAW
-  // IMAGE -> IMAGE
-
   const resourceType =
-    isPDF ? "raw" : "image";
+    file.type === "application/pdf"
+      ? "raw"
+      : "image";
 
   const response = await fetch(
-
-    `https://api.cloudinary.com/v1_1/dj0jwlb3z/${resourceType}/upload`,
-
+    `https://api.cloudinary.com/v1_1/dighe85qb/${resourceType}/upload`,
     {
       method: "POST",
       body: formData,
     }
   );
 
-  const data =
-    await response.json();
+  const data = await response.json();
+
+  console.log("Cloudinary:", data);
+
+  if (!response.ok) {
+    throw new Error(
+      data.error?.message || "Upload Failed"
+    );
+  }
 
   return data.secure_url;
 };
